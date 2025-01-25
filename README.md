@@ -39,7 +39,7 @@ The `generate-CRUD` command generates CRUD templates for a specified entity.
 **Command Syntax:**
 
 ```bash
-devbuddy generate-CRUD --entity <EntityName> --referenceEntity <ReferenceEntity> --templates <Templates> --config <ConfigPath> [--rootPath <RootPath>]
+devbuddy generate-CRUD --entity <EntityName> --referenceEntity <ReferenceEntity> --templates <Templates> --config <ConfigPath> --rootPath <RootPath>
 ```
 
 **Options:**
@@ -151,6 +151,7 @@ To adapt the AutoCRUD tool to your project's needs, modify the `config.json` ent
 
 ---
 
+
 ---
 
 ### 2. Generate Faker Classes
@@ -189,6 +190,43 @@ devbuddy generate-Fakers --model <ModelName> --modelsPath <ModelsPath> --outputP
   ```bash
   devbuddy generate-Fakers --model Product --modelsPath ./Models --outputPath ./Fakers
   ```
+
+
+
+## Integrating Generated Classes into Your Application
+
+Once **DevBuddy** has generated Faker classes, you can integrate them into your application to seed data either to JSON files or directly to your database. Here are two methods to implement the generated classes:
+
+### Method 1: Seeding to JSON Files
+You can initialize the seeding process during the application startup by including the following code in your startup class .
+```csharp
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    // Register Faker classes
+    FakerRunner.RegisterFakers();
+
+    // Optional: Run Fakers to generate JSON files
+    // This will generate JSON files with 99 sets of data per model
+    FakerRunner.RunFakersToJson("OutPutPathForTheJsonFiles", 99);
+}
+```
+This method is useful for generating data in bulk that can be used for testing or initial loading scenarios.
+
+### Method 2: Seeding Directly to Database
+To seed data directly into your database using the generated Faker classes, include the following code in your startup class:
+
+```csharp
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    using var scope = app.ApplicationServices.CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<YourAppDbContext>();
+
+    // Seed data directly to the database
+    // This will insert 100 sets of data directly into your database
+    FakerRunner.RunFakerToDatabase(dbContext, 100);
+}
+```
+Replace `YourAppDbContext` with the actual DbContext of your application. This approach is particularly effective for dynamically inserting test data into your development or test databases.
 
 ---
 
