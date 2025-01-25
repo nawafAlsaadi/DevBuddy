@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "AutoCRUD.Presentation": {
+      "commandName": "Project",
+      //"commandLineArgs": "generate-seeding --modelsPath \"C:\\Users\\002na\\source\\repos\\TestingMyCli\\TestingMyCli.Domain\\Models\" --outputPath \"C:\\Users\\002na\\source\\repos\\TestingMyCli\\TestingMyCli.Persistance\\Data\\Fakers\" --model aa,Address"
+      //"commandLineArgs": "generate-seeding --modelsPath \"C:\\Users\\002na\\source\\repos\\TestingMyCli\\TestingMyCli.Domain\\Models\" --outputPath \"C:\\Users\\002na\\source\\repos\\TestingMyCli\\TestingMyCli.Persistance\\Data\\Fakers\" --model all"
+      //"commandLineArgs": "generate-CRUD --entity Aa --re Address --templates App --rootPath \"C:\\Users\\002na\\source\\repos\\TestingMyCli\" "
+      //"commandLineArgs": "generate-CRUD --entity Aa --re Address --templates all"
+      //"commandLineArgs": "generate-CRUD --entity Aa --re Address --templates all --rootPath \"C:\\Users\\002na\\source\\repos\\TestingMyCli\" --config \"C:\\Users\\002na\\Documents\\config.json\""
+      //"commandLineArgs": "generate-CRUD --entity Aa --re Address --templates Controller,ViewModel --rootPath \"C:\\Users\\002na\\source\\repos\\TestingMyCli\" --config \"C:\\Users\\002na\\Documents\\config.json\""
+      //"commandLineArgs": "generate-CRUD --help"
+
+    }
+  }
+}

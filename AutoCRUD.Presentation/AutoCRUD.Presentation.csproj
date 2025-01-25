@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <Version>1.0.2</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <ToolCommandName>DevBuddy</ToolCommandName>
+    <PackageId>DevBuddy</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>A CLI tool for generating CRUD templates and Faker classes to streamline development.</Description>
+    <PackageReleaseNotes>Initial release with CRUD and Faker class generation functionality.</PackageReleaseNotes>
+     <RepositoryType>git</RepositoryType>
+    <Authors>Nawaf Alsaadi</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AutoCRUD.Application\AutoCRUD.Application.csproj" />
+    <ProjectReference Include="..\AutoCRUD.Domain\AutoCRUD.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

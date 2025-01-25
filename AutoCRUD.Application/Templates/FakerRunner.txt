@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
+using System.Reflection;
+using Humanizer;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
+using {usingModels};
+
+public static class FakerRunner
+{
+    private static List<object> _fakers = new List<object>();
+
+    public static void RegisterFakers()
+    {
+        {RegisteredFakers}
+    }
+
+    public static List<object> GetFakerInstances()
+    {
+        var fakerInstances = new List<object>
+        {
+            {FakerInstances} 
+        };
+        return fakerInstances;
+    }
+
+    public static void RunFakersToJson(string outputPath, int recordCount)
+    {
+        foreach (var faker in _fakers)
+        {
+            RunFakerToJson(faker, outputPath, recordCount);
+        }
+    }
+
+    public static void RunFakerToJson(object faker, string outputPath, int recordCount)
+    {
+        try
+        {
+            var fakerType = faker.GetType();
+            var generateMethod = fakerType.GetMethod(
+                "Generate",
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy,
+                null,
+                new[] { typeof(int), typeof(string) },
+                null
+            );
+
+            if (generateMethod == null)
+            {
+                throw new InvalidOperationException($"The Generate(int count, string ruleSet) method was not found in the class {fakerType.Name}");
+            }
+
+            var generatedData = generateMethod.Invoke(faker, new object[] { recordCount, null });
+
+            var json = JsonConvert.SerializeObject(generatedData, Formatting.Indented);
+            var fileName = fakerType.Name.Replace("Faker", "");
+            fileName = $"{fileName.Pluralize()}.json"; // Requires Humanizer package
+            var filePath = Path.Combine(outputPath, fileName);
+
+            File.WriteAllText(filePath, json);
+
+            Console.WriteLine($"Generated JSON saved to: {filePath}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error running Faker {faker.GetType().Name}: {ex.Message}");
+        }
+    }
+
+    public static void RunFakerToDatabase(DbContext dbContext, int recordCount)
+    {
+        {varName}
+       try
+        { 
+           {classes} 
+            dbContext.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+                    Console.WriteLine($@"Error in   {ex.Message}");
+
+        }            
+    }
+       public static bool AreAllPropertiesNull<T>(T obj)
+    {
+        if (obj == null)
+            return true;
+
+        var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        return properties.All(p => p.GetValue(obj) == null);
+    }
+}
