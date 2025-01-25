@@ -1,0 +1,141 @@
+{
+    "TemplateCategories": [
+      {
+        "Name": "CountryController",
+        "Attributes":["FullTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Web",
+          "Subfolder": "Controllers/Api",
+          "FileNamePattern": "{entityName}Controller.cs"
+        }
+      },
+      {
+        "Name": "Model",
+        "Attributes": ["ReadOnly"],
+        "TemplateInfo": {
+          "ProjectLayer": "Domain",
+          "Subfolder": "Models",
+          "FileNamePattern": "{entityName}.cs"
+        }
+      },
+   
+      {
+        "Name": "Controller",
+        "Attributes": ["FullTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Web",
+          "Subfolder": "Controllers",
+          "FileNamePattern": "{entityName}Controller.cs"
+        }
+      },
+      {
+        "Name": "ViewModel",
+        "Attributes": ["HalfTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Web",
+          "Subfolder": "ViewModels",
+          "FileNamePattern": "{entityName}ViewModel.cs"
+        }
+      },
+      {
+        "Name": "SearchViewModel",
+        "Attributes": ["HalfTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Web",
+          "Subfolder": "ViewModels/Search",
+          "FileNamePattern": "{entityName}SearchViewModel.cs"
+        }
+      },
+      {
+        "Name": "Service",
+        "Attributes": ["FullTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Application",
+          "Subfolder": "Services",
+          "FileNamePattern": "{entityName}Service.cs"
+        }
+      },
+      {
+        "Name": "IService",
+        "Attributes": ["FullTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Domain",
+          "Subfolder": "Services",
+          "FileNamePattern": "I{entityName}Service.cs"
+        }
+      },
+      {
+        "Name": "Index",
+        "Attributes": ["FullTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Web",
+          "Subfolder": "Views/{entityName}",
+          "FileNamePattern": "Index.cshtml"
+        }
+      },
+      {
+        "Name": "Add",
+        "Attributes": ["FullTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Web",
+          "Subfolder": "Views/{entityName}",
+          "FileNamePattern": "Add.cshtml"
+        }
+      },
+      {
+        "Name": "Edit",
+        "Attributes": ["FullTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Web",
+          "Subfolder": "Views/{entityName}",
+          "FileNamePattern": "Edit.cshtml"
+        }
+      },
+      {
+        "Name": "_List",
+        "Attributes": ["HalfTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Web",
+          "Subfolder": "Views/{entityName}",
+          "FileNamePattern": "_List.cshtml"
+        }
+      },
+      {
+        "Name": "_Form",
+        "Attributes": ["HalfTemplate"],
+        "TemplateInfo": {
+          "ProjectLayer": "Web",
+          "Subfolder": "Views/{entityName}",
+          "FileNamePattern": "_Form.cshtml"
+        }
+      },
+      {
+        "Name": "CommonText",
+        "Attributes":["AppendOnly"],
+        "TemplateInfo": {
+          "ProjectLayer": "Core",
+          "Subfolder": "Resources",
+          "FileNamePattern": "CommonText.resx"
+        }
+      },
+      {
+        "Name": "CommonText",
+        "Attributes":["AppendOnly"],
+        "TemplateInfo": {
+          "ProjectLayer": "Core",
+          "Subfolder": "Resources",
+          "FileNamePattern": "CommonText.en.resx"
+        }
+      },
+      {
+        "Name": "App",
+        "Attributes": ["AppendOnly"],
+        "TemplateInfo": {
+          "ProjectLayer": "Application",
+          "Subfolder": "",
+          "FileNamePattern": "{solutionName}App.cs"
+        }
+      }
+    ]
+  }
+  
