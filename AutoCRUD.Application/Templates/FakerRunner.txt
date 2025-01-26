@@ -73,6 +73,8 @@ public static class FakerRunner
     public static void RunFakerToDatabase(DbContext dbContext, int recordCount)
     {
         {varName}
+         using (dbContext)  
+    {
        try
         { 
            {classes} 
@@ -82,7 +84,8 @@ public static class FakerRunner
         {
                     Console.WriteLine($@"Error in   {ex.Message}");
 
-        }            
+        }          
+        }
     }
        public static bool AreAllPropertiesNull<T>(T obj)
     {

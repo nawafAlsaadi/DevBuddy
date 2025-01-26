@@ -1,14 +1,14 @@
 
-# DevBuddy
+# DevBuddy: Your Automated Development Assistant
 
-**DevBuddy** is a command-line tool designed to streamline development by automating repetitive tasks like generating CRUD templates and Faker classes. It helps developers focus on building features instead of boilerplate code.
+**DevBuddy** is a command-line tool designed to streamline development by automating repetitive tasks like generating CRUD  (Create, Read, Update, Delete) and Faker classes. CRUD operations are fundamental for any database-driven application, allowing users to manage their data effectively. Faker classes, on the other hand, are used to create mock data that mimics real-world data structures, which is essential for testing and development environments.By using DevBuddy, developers can save time.
 
 ---
 
 ## Features
 
-- Generate CRUD templates for entities.
-- Generate Faker classes for data seeding.
+- CRUD Operations: Automatically generate classes that support all CRUD operations for your database models.
+- Faker Support: Easily generate Faker classes to produce realistic and random data for testing. DevBuddy utilizes the Bogus library, a popular and powerful tool for creating fake data.
 - Simple, flexible, and easy to use.
 
 ---
@@ -61,7 +61,7 @@ devbuddy generate-CRUD --entity <EntityName> --referenceEntity <ReferenceEntity>
   **Example:** `--config ./config.json`.
 
 ## Configuration File: `config.json`
-The `config.json` file plays a crucial role in the DevBuddy tool by defining the templates and settings used for code generation. This configuration ensures that the tool generates code that is tailored to the specific architecture and naming conventions of your project. Explore the configuration file at this URL, where you are welcome to view and adjust it to better align with your specific needs.
+The `config.json` file plays a crucial role in the DevBuddy tool by defining the templates and settings used for code generation. This configuration ensures that the tool generates code that is tailored to the specific architecture and naming conventions of your project. Explore the configuration file at [Here](https://github.com/nawafAlsaadi/DevBuddy/blob/main/config.json), where you are welcome to view and adjust it to better align with your specific needs.
 
 ### Structure:
 - **TemplateCategories**: An array of different templates that AutoCRUD can generate. Each category is specified with attributes and a template information block that includes the project layer, subfolder path, and filename pattern.
@@ -108,6 +108,8 @@ The `config.json` file plays a crucial role in the DevBuddy tool by defining the
 You can customize the tool's behavior by modifying the `TemplateCategories` entries:
 - **Name**: The identifier for the template category.
 - **Attributes**: Modifiers such as `FullTemplate`, `ReadOnly`., that influence how the template is processed.
+    - FullTemplate: Use this attribute for templates that require complete rendering without modifications during runtime. Ideal for scaffolding                        fully operational views or controllers directly from the template.
+    - ReadOnly: Assign this attribute to templates that should not be altered post-generation. This is typically used for domain model definitions,                     ensuring their integrity and consistency throughout the application lifecycle.
 - **TemplateInfo**: Details where and how the template files should be structured within your project.
 ### File Patterns:
 The `FileNamePattern` provides a template for the filenames that AutoCRUD will generate. For example:
@@ -117,6 +119,20 @@ The `FileNamePattern` provides a template for the filenames that AutoCRUD will g
 
 To adapt the AutoCRUD tool to your project's needs, modify the `config.json` entries to match your desired output file structure and naming conventions. Ensure that each path and filename pattern correctly reflects the target directory structure in your project.
 
+## Important Note
+
+- **Configuring Model Templates in config.json:** To ensure that DevBuddy accurately recognizes and processes your Model templates, it is crucial to precisely define each model's configuration settings in the config.json file. This configuration enables DevBuddy to effectively retrieve the properties from the model during code generation. The following example illustrates how to set up a Model template properly:
+```bash
+{
+  "Name": "Model",
+  "Attributes": ["ReadOnly"],
+  "TemplateInfo": {
+    "ProjectLayer": "Domain",
+    "Subfolder": "Models",
+    "FileNamePattern": "{entityName}.cs"
+  }
+}
+```
 ---
 
 **Examples:**
@@ -176,9 +192,15 @@ devbuddy generate-Fakers --model <ModelName> --modelsPath <ModelsPath> --outputP
 
 ---
 
-## Summary
+## Contributing
 
-DevBuddy simplifies repetitive coding tasks, allowing developers to save time and focus on building features. With its ability to generate CRUD templates and Faker classes, it’s an essential tool for any project.
+We welcome contributions to DevBuddy! If you have suggestions for improvements or have encountered bugs, please open an issue or submit a pull request on.[GitHub](https://github.com/nawafAlsaadi/DevBuddy/tree/main)
+
+---
+
+
+## License
+DevBuddy is released under the MIT License. See the LICENSE file for more details.
 
 ---
 

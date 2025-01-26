@@ -28,7 +28,7 @@ class Program
         Console.WriteLine("Do you want to continue? (yes/no)");
 
         string? response = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(response) || response.ToLower() != "yes")
+        if (string.IsNullOrWhiteSpace(response) || !(response.ToLowerInvariant() == "yes" || response.ToLowerInvariant() == "y"))
         {
             Console.WriteLine("Operation cancelled by the user.");
             return;

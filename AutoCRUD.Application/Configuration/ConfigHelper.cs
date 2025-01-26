@@ -43,7 +43,40 @@ public static class ConfigHelper
         _solutionName = Path.GetFileNameWithoutExtension(solutionFiles[0]);
         return _solutionName;
     }
+    public static string GetRootPath(string rootPath)
+    {
+        // Check if the provided rootPath is null or empty.
+        if (string.IsNullOrEmpty(rootPath))
+        {
+            // Use the current directory as the default rootPath.
+            rootPath = Directory.GetCurrentDirectory();
+            Console.WriteLine($"The default directory is set to: {rootPath}");
+            Console.WriteLine("Is this correct? (yes/no)");
 
+            // Read the user's response.
+            string response = Console.ReadLine();
+
+            // Normalize the response to handle different cases like "YES", "yes", "y", etc.
+            if (!string.IsNullOrWhiteSpace(response) && response.Trim().ToLowerInvariant() == "no")
+            {
+                // If the user says no, ask for the correct directory.
+                Console.WriteLine("Please enter the correct directory path:");
+                string newUserPath = Console.ReadLine();
+
+                // Validate the new user input and assign it to rootPath if it's not empty.
+                if (!string.IsNullOrEmpty(newUserPath))
+                {
+                    rootPath = newUserPath;
+                }
+                else
+                {
+                    Console.WriteLine("No valid directory entered. Using default directory.");
+                }
+            }
+        }
+
+        return rootPath;
+    }
     #region will be deleted
     public static IConfiguration InitializeConfiguration()
     {

@@ -49,24 +49,23 @@ namespace AutoCRUD.Application.FileManagement
             // List to hold the file paths
             List<string> filePaths = new List<string>();
             var modelPath = Path.Combine(folderPath, model);
-
-            // Filter model files if a specific model is provided
-            if (model.Equals("all"))
-            {
-                modelPath = folderPath;
-                filePaths.AddRange(Directory.GetFiles(modelPath, "*.cs")); // Adjust file extension if needed
-
-            }
-            else
-            {
-                var models = model.Split(',');
-                foreach (var item in models)
-                {
-                    filePaths.Add(Path.Combine(folderPath, item + ".cs"));
-                }
-            }
             try
             {
+                // Filter model files if a specific model is provided
+                if (model.Equals("all"))
+                {
+                    modelPath = folderPath;
+                    filePaths.AddRange(Directory.GetFiles(modelPath, "*.cs")); 
+                }
+                else
+                {
+                    var models = model.Split(',');
+                    foreach (var item in models)
+                    {
+                        filePaths.Add(Path.Combine(folderPath, item + ".cs"));
+                    }
+                }
+
                 // Get all file paths in the specified folder
                 Console.WriteLine("File paths retrieved successfully!");
                 Console.WriteLine($"Number of files: {filePaths.Count}");
@@ -87,7 +86,7 @@ namespace AutoCRUD.Application.FileManagement
             }
             catch (DirectoryNotFoundException ex)
             {
-                throw new Exception($"can not find : {modelPath}");
+                throw new Exception($"can not find Models in: {modelPath}");
             }
             catch (Exception ex)
             {
