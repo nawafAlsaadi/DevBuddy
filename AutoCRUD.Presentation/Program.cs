@@ -23,7 +23,11 @@ class Program
 
     static async Task Main(string[] args)
     {
-
+        if (args.Contains("--version"))
+        {
+            Console.WriteLine(GetVersion());  
+            return;
+        }
         Console.WriteLine("Warning: This tool creates and may overwrites existing files. Ensure you have committed your code in Git or a similar version control system to avoid loss of work.");
         Console.WriteLine("Do you want to continue? (yes/no)");
 
@@ -71,6 +75,7 @@ class Program
                 }
                 await FakersCommand.GenerateFakers(args);
             }
+           
         }
         catch (Exception ex)
         {
@@ -81,7 +86,10 @@ class Program
     }
 
 
-
+    static string? GetVersion()
+    {
+        return typeof(Program)?.Assembly?.GetName()?.Version?.ToString();
+    }
     private static IServiceCollection ConfigureServices()
     {
         var services = new ServiceCollection();

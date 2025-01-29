@@ -40,6 +40,7 @@ namespace AutoCRUD.Application.Services.Faker
             sb.AppendLine("{");
             sb.AppendLine($"    public {file.Entity}Faker (string locale) : base(locale)");
             sb.AppendLine("    {");
+            sb.AppendLine(" // Important: Instead of deleting rules, simply comment them out. The tool will overwrite deleted rules on the next run.\r\n");
             sb.Append(FakerHelper.GetRolesForProperties(file.Properties, fakersClasses, faker));
             sb.AppendLine("    }");
             sb.AppendLine("}");

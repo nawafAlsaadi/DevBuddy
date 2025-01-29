@@ -22,65 +22,76 @@ namespace AutoCRUD.Application.Services
         }
         public List<PropertyInfo> ExtractPropertiesFromEntity(string entityPath)
         {
-
-            if (string.IsNullOrEmpty(entityPath) || !File.Exists(entityPath))
-                throw new ArgumentException("Invalid entity file path.");
-
-            var properties = new List<PropertyInfo>();
-
-            // Read the file content
-            string entityContent = _fileManager.ReadTemplate(entityPath);
-
-            // Parse the entity using Roslyn
-            var syntaxTree = CSharpSyntaxTree.ParseText(entityContent);
-            var root = syntaxTree.GetRoot() as CompilationUnitSyntax;
-
-            if (root == null)
-                throw new InvalidDataException("Invalid or empty syntax tree.");
-
-            var compilation = CSharpCompilation.Create("TempCompilation")
-     .AddReferences(
-         MetadataReference.CreateFromFile(typeof(object).Assembly.Location), // Core mscorlib
-         MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location), // System.Linq
-         MetadataReference.CreateFromFile(typeof(List<>).Assembly.Location) // System.Collections.Generic
-     )
-     .AddSyntaxTrees(syntaxTree);
-
-
-            var semanticModel = compilation.GetSemanticModel(syntaxTree);
-
-            // Get the first class declaration (assuming one class per file)
-            var classNode = root.DescendantNodes().OfType<ClassDeclarationSyntax>().FirstOrDefault();
-            if (classNode == null)
-                throw new InvalidDataException("No class found in the provided file.");
-
-            var hasIdProperty = false;
-
-            // Process all members (properties and fields)
-            foreach (var memberNode in classNode.DescendantNodes())
+            try
             {
-                if (memberNode is PropertyDeclarationSyntax propertyNode)
-                {
-                    properties.Add(ProcessProperty(propertyNode, semanticModel, ref hasIdProperty));
-                }
-                else if (memberNode is FieldDeclarationSyntax fieldNode)
-                {
-                    properties.Add(ProcessField(fieldNode, semanticModel));
-                }
-            }
+                if (string.IsNullOrEmpty(entityPath) || !File.Exists(entityPath))
+                    return null;
 
-            // Ensure the "Id" property exists
-            if (!hasIdProperty)
+                var properties = new List<PropertyInfo>();
+
+                // Read the file content
+                string entityContent = _fileManager.ReadTemplate(entityPath);
+
+                // Parse the entity using Roslyn
+                var syntaxTree = CSharpSyntaxTree.ParseText(entityContent);
+                var root = syntaxTree.GetRoot() as CompilationUnitSyntax;
+
+                if (root == null)
+                    return null;
+
+                //throw new InvalidDataException("Invalid or empty syntax tree.");
+
+                var compilation = CSharpCompilation.Create("TempCompilation")
+         .AddReferences(
+             MetadataReference.CreateFromFile(typeof(object).Assembly.Location), // Core mscorlib
+             MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location), // System.Linq
+             MetadataReference.CreateFromFile(typeof(List<>).Assembly.Location) // System.Collections.Generic
+         )
+         .AddSyntaxTrees(syntaxTree);
+
+
+                var semanticModel = compilation.GetSemanticModel(syntaxTree);
+
+                // Get the first class declaration (assuming one class per file)
+                var classNode = root.DescendantNodes().OfType<ClassDeclarationSyntax>().FirstOrDefault();
+                if (classNode == null)
+                    return null;
+                //throw new InvalidDataException("No class found in the provided file.");
+
+                var hasIdProperty = false;
+
+                // Process all members (properties and fields)
+                foreach (var memberNode in classNode.DescendantNodes())
+                {
+                    if (memberNode is PropertyDeclarationSyntax propertyNode)
+                    {
+                        properties.Add(ProcessProperty(propertyNode, semanticModel, ref hasIdProperty));
+                    }
+                    else if (memberNode is FieldDeclarationSyntax fieldNode)
+                    {
+                        properties.Add(ProcessField(fieldNode, semanticModel));
+                    }
+                }
+
+                // Ensure the "Id" property exists
+                if (!hasIdProperty)
+                {
+                    properties.Add(new PropertyInfo
+                    {
+                        Name = "Id",
+                        Type = typeof(string), // Default to string for the "Id" property
+                        Attributes = new List<string>()
+                    });
+                }
+
+                return properties;
+            }
+            catch (Exception ex)
             {
-                properties.Add(new PropertyInfo
-                {
-                    Name = "Id",
-                    Type = typeof(string), // Default to string for the "Id" property
-                    Attributes = new List<string>()
-                });
-            }
+                Console.WriteLine($"An error occurred: {ex.Message}");
 
-            return properties;
+            }
+            return null;
         }
         public List<PropertyInfo> ExtractPropertiesFromEntityTypeString(string entityPath)
         {

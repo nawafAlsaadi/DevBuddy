@@ -15,18 +15,18 @@ namespace AutoCRUD.Presentation
 
         public GenerateCRUDCommand(CodeGeneratorApp codeGeneratorApp)
         {
-            _app = codeGeneratorApp;
+            _app = codeGeneratorApp ?? throw new ArgumentNullException(nameof(codeGeneratorApp), "Code generator application cannot be null.");
         }
         public async Task GenerateCRUD(string[] args)
         {
-            Console.WriteLine("Welcome to AutoCRUD! Your code generation assistant.");
-
+            if (args == null) throw new ArgumentNullException(nameof(args), "Arguments cannot be null.");
             if (_app == null)
             {
                 Console.WriteLine("Error: Code generation service is missing.");
                 return;
             }
-
+           
+            Console.WriteLine("Welcome to AutoCRUD! Your code generation assistant.");
             var rootCommand = BuildCodeGenerationCommand(_app);
             await rootCommand.InvokeAsync(args);
 
@@ -56,7 +56,6 @@ namespace AutoCRUD.Presentation
             command.SetHandler((string entity, string referenceEntity, string templates, string rootPath, string configPath) =>
             {
 
-                Console.WriteLine($"Loading configuration from {configPath}...");
                 var templateConfigs = ConfigManager.LoadConfiguration(configPath);
 
                 codeGeneratorApp.RunCRUDApp(entity, referenceEntity, templates, rootPath, configPath, templateConfigs);

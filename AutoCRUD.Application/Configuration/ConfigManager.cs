@@ -15,6 +15,7 @@ namespace AutoCRUD.Application.Configuration
     { 
         public static List<TemplateConfig> LoadConfiguration(string configPath)
         {
+
             if (!File.Exists(configPath))
             {
                 Console.WriteLine($"Configuration file not found at {configPath}. Please enter the correct path:");

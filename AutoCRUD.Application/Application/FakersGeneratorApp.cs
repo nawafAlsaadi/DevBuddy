@@ -6,6 +6,7 @@ using AutoCRUD.Domain.Models.Extensions;
 using AutoCRUD.Domain.Models;
 using Bogus;
 using AutoCRUD.Domain.FileManager;
+using System;
 namespace AutoCRUD.Application.Application
 {
     public class FakersGeneratorApp
@@ -33,7 +34,7 @@ namespace AutoCRUD.Application.Application
             _fakerRunnerServices = fakerRunnerServices;
             _propertyService = propertyService;
             _fakerServices = fakerServices;
-           
+
         }
 
         // Initialization Methods
@@ -42,11 +43,11 @@ namespace AutoCRUD.Application.Application
         /// </summary>
         private void InitializePaths(string modelsPath)
         {
- 
-            RootPath = string.IsNullOrEmpty(RootPath) 
-                ? Directory.GetCurrentDirectory() 
+
+            RootPath = string.IsNullOrEmpty(RootPath)
+                ? Directory.GetCurrentDirectory()
                 : RootPath;
- 
+
             SolutionName = ConfigHelper.GetSolutionName(RootPath);
             ModelsPath = string.IsNullOrEmpty(modelsPath) ? TemplateCategoryExtensions.GetModelsPath(SolutionName, RootPath) : modelsPath;
             UsingModels = ModelsPath.Replace(RootPath, string.Empty)
@@ -62,18 +63,31 @@ namespace AutoCRUD.Application.Application
         /// </summary>
         public void GenerateFakersClasses(string modelsPath, string outputPath, string model)
         {
-            InitializePaths( modelsPath);
-            var faker = new Faker();
-            var fakerClasses = new List<string>();
-            var modelFiles = _fileDataManager.FetchModelFilesFromDirectory(modelsPath, model);
-
-            foreach (var modelFile in modelFiles)
+            try
             {
-                modelFile.Properties = _propertyService.ExtractPropertiesFromEntity(modelFile.Path);
-                fakerClasses.Add(modelFile.Entity);
+
+                InitializePaths(modelsPath);
+                var faker = new Faker();
+                var fakerClasses = new List<string>();
+                var modelFiles = _fileDataManager.FetchModelFilesFromDirectory(modelsPath, model);
+
+                foreach (var modelFile in modelFiles)
+                {
+                    var properties = _propertyService.ExtractPropertiesFromEntity(modelFile.Path);
+                    if (properties != null)
+                    {
+                        modelFile.Properties = properties;
+                        fakerClasses.Add(modelFile.Entity);
+                    }
+                }
+                var generatedClasses = SaveFakerClasses(modelFiles, outputPath, faker, fakerClasses);
+                _fakerRunnerServices.GenerateFakerRunner(outputPath, generatedClasses, fakerClasses, UsingModels);
+
             }
-            var generatedClasses = SaveFakerClasses(modelFiles, outputPath, faker, fakerClasses);
-            _fakerRunnerServices.GenerateFakerRunner(outputPath, generatedClasses, fakerClasses, UsingModels);
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
         }
 
         // Private Methods
@@ -90,13 +104,15 @@ namespace AutoCRUD.Application.Application
             {
                 file.Path = outputPath;
                 var content = GenerateFakerClassContent(file, faker, fakersClasses);
-
-                var fileName = $"{file.Entity}Faker.cs";
-                var filePath = Path.Combine(outputPath, fileName);
-
-                _fileManager.WriteToFile(filePath, content);
-                Console.WriteLine($"Generated: {fileName}");
-                classes.Add($"{file.Entity}Faker");
+                if(!string.IsNullOrEmpty(content))
+                {
+                    var fileName = $"{file.Entity}Faker.cs";
+                    var filePath = Path.Combine(outputPath, fileName);
+                    _fileManager.WriteToFile(filePath, content);
+                    Console.WriteLine($"Generated: {fileName}");
+                    classes.Add($"{file.Entity}Faker");
+                }
+          
             }
             return classes;
         }
@@ -104,15 +120,19 @@ namespace AutoCRUD.Application.Application
 
         private string GenerateFakerClassContent(FileModel file, Faker faker, List<string> fakersClasses)
         {
-            var filePath = Path.Combine(file.Path, $"{file.Entity}Faker.cs");
-            var existingContent = _fileManager.FileExists(filePath) ? _fileManager.ReadTemplate(filePath) : string.Empty;
-
-            if (!string.IsNullOrEmpty(existingContent))
+            if (file.Properties != null)
             {
-                return _fakerServices.GeneratePropertyRules(file, existingContent, fakersClasses, faker);
-            }
-            return _fakerServices.CreateNewFakerClasse(UsingModels, file, fakersClasses, faker);
 
+                var filePath = Path.Combine(file.Path, $"{file.Entity}Faker.cs");
+                var existingContent = _fileManager.FileExists(filePath) ? _fileManager.ReadTemplate(filePath) : string.Empty;
+
+                if (!string.IsNullOrEmpty(existingContent))
+                {
+                    return _fakerServices.GeneratePropertyRules(file, existingContent, fakersClasses, faker);
+                }
+                return _fakerServices.CreateNewFakerClasse(UsingModels, file, fakersClasses, faker);
+            }
+            return string.Empty;
         }
 
     }

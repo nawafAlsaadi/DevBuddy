@@ -6,12 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
-    <Version>1.0.5</Version>
+    <Version>1.0.7</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <ToolCommandName>DevBuddy</ToolCommandName>
     <PackageId>DevBuddy</PackageId>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Description>A CLI tool for generating CRUD templates and Faker classes to streamline development.</Description>
+    <Description>DevBuddy is a command-line tool designed to streamline development by automating repetitive tasks like generating CRUD (Create, Read, Update, Delete) and Faker classes. CRUD operations are fundamental for any database-driven application, allowing users to manage their data effectively. Faker classes, on the other hand, are used to create mock data that mimics real-world data structures, which is essential for testing and development environments.By using DevBuddy, developers can save time.</Description>
     <PackageReleaseNotes>Initial release with CRUD and Faker class generation functionality.</PackageReleaseNotes>
      <RepositoryType>git</RepositoryType>
     <Authors>Nawaf Alsaadi</Authors>

@@ -70,7 +70,7 @@ public class CodeGenerator : ICodeGenerator
         }
         #endregion
 
-        Console.WriteLine($"{templateData?.Path} generating... at {outputFileData?.Path}!");
+        Console.WriteLine($"generating... {outputFileData?.Path}!");
 
         string templateContent = string.Empty;
         var properties = _propertyService.ExtractPropertiesFromEntityTypeString(ReferenceEntityData.Path);
@@ -158,10 +158,6 @@ public class CodeGenerator : ICodeGenerator
             _fileManager.ValidateFiles(Error: out error, shouldBeExist: true,
             templateData, $"Template Missing: We couldn’t find the required template file at {templateData.Path}. Please ensure it exists and try again ");
         }
-
-        //_fileManager.EnsureDirectoryExists(outputFileData.Path); could be right  
-        //_fileManager.ValidateFiles(Error: out error, shouldBeExist: false, outputFileData, $"The required files already exist at the specified path: {outputFileData.getFilePath()}. Skipping generation.");
-
     }
     private void AddingResourse(List<FileModel> files, List<PropertyInfo> properties)
     {

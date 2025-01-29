@@ -64,7 +64,7 @@ public class CodeGeneratorApp
 
     private void ExitApplication()
     {
-        Console.WriteLine("Thanks for being a little lazy and letting AutoCRUD do the work! Goodbye!");
+        Console.WriteLine("Thanks for chilling while I do the heavy lifting! Catch you later, My Buddy!");
         Environment.Exit(0);
     }
 
