@@ -53,7 +53,7 @@ devbuddy CRUD --entity <EntityName> --referenceEntity <ReferenceEntity> --templa
 - Generate all templates for an entity using a reference entity:
 
   ```bash
-  devbuddy CRUD -e Product -re Customer -t all --config ./config.json
+  devbuddy CRUD -e Product -re Customer -t all
   ```
 
 - Generate specific templates for an entity:
@@ -79,11 +79,12 @@ devbuddy CRUD --entity <EntityName> --referenceEntity <ReferenceEntity> --templa
 
 - `--rootPath` (optional): The root folder where files will be generated. Defaults to the current directory.
 
-- `--config` (required): Path to a configuration file for custom settings (e.g., paths and default templates).  
+- `--config` (optional): Path to a configuration file for custom settings ().  
   **Example:** `--config ./config.json`.
 
 ## Configuration File: `config.json`
-The `config.json` file plays a crucial role in the DevBuddy tool by defining the templates and settings used for code generation. This configuration ensures that the tool generates code that is tailored to the specific architecture and naming conventions of your project. Explore the configuration file at [Here](https://github.com/nawafAlsaadi/DevBuddy/blob/main/config.json), where you are welcome to view and adjust it to better align with your specific needs.
+The `config.json` file is crucial for DevBuddy, defining templates and parameters for code generation. By default, the tool employs a pre-configured config.json.
+For projects with unique needs or architectures that differ from the default setup, you can customize this file to fit your specifications. Adjust and tailor the configuration by exploring it on GitHub to ensure it aligns perfectly with your project's demands. View the default configuration  [Here](https://github.com/nawafAlsaadi/DevBuddy/blob/main/config.json).
 
 ### Structure:
 - **TemplateCategories**: An array of different templates that AutoCRUD can generate. Each category is specified with attributes and a template information block that includes the project layer, subfolder path, and filename pattern.
@@ -139,7 +140,7 @@ The `FileNamePattern` provides a template for the filenames that AutoCRUD will g
 
 ### Usage:
 
-To adapt the AutoCRUD tool to your project's needs, modify the `config.json` entries to match your desired output file structure and naming conventions. Ensure that each path and filename pattern correctly reflects the target directory structure in your project.
+To adapt the tool to your project's needs, modify the `config.json` entries to match your desired output file structure and naming conventions. Ensure that each path and filename pattern correctly reflects the target directory structure in your project.
 
 ## Important Note
 
