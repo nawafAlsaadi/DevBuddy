@@ -44,7 +44,7 @@ namespace AutoCRUD.Presentation
             var rootPathOption = new Option<string>("--rootPath", "The root path for file generation.");
             var configOption = new Option<string>("--config", "Path to a configuration file (optional).") { IsRequired = true };
 
-            var command = new Command("generate-CRUD", "Generate CRUD for an entity,  using a base entity as a template.")
+            var command = new Command("CRUD", "Generate CRUD for an entity,  using a reference entity as a template.")
             {
                 entityOption,
             referenceEntityOption,

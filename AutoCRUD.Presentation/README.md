@@ -1,7 +1,13 @@
 
 # DevBuddy: Your Automated Development Assistant
 
-**DevBuddy** is a command-line tool designed for use on Windows operating systems exclusively,  designed to streamline development by automating repetitive tasks like generating CRUD  (Create, Read, Update, Delete) and Faker classes. CRUD operations are fundamental for any database-driven application, allowing users to manage their data effectively. Faker classes, on the other hand, are used to create mock data that mimics real-world data structures, which is essential for testing and development environments.By using DevBuddy, developers can save time.
+**DevBuddy** is a command-line tool designed to streamline development by automating repetitive tasks like generating CRUD  (Create, Read, Update, Delete) and Faker classes. CRUD operations are fundamental for any database-driven application, allowing users to manage their data effectively. Faker classes, on the other hand, are used to create mock data that mimics real-world data structures, which is essential for testing and development environments.By using DevBuddy, developers can save time.
+
+---
+
+## Compatibility
+
+Please note that this tool is designed for use on Windows operating systems exclusively as of now.
 
 ---
 
@@ -34,12 +40,12 @@ DevBuddy provides two main commands:
 
 ### 1. Generate CRUD Templates
 
-The `generate-CRUD` command generates CRUD templates for a specified entity.
+The `CRUD` command generates CRUD templates for a specified entity.
 
 **Command Syntax:**
 
 ```bash
-devbuddy generate-CRUD --entity <EntityName> --referenceEntity <ReferenceEntity> --templates <Templates> --config <ConfigPath> --rootPath <RootPath>
+devbuddy CRUD --entity <EntityName> --referenceEntity <ReferenceEntity> --templates <Templates> --config <ConfigPath> --rootPath <RootPath>
 ```
 
 **Examples:**
@@ -47,13 +53,13 @@ devbuddy generate-CRUD --entity <EntityName> --referenceEntity <ReferenceEntity>
 - Generate all templates for an entity using a reference entity:
 
   ```bash
-  devbuddy generate-CRUD -e Product -re Customer -t all --config ./config.json
+  devbuddy CRUD -e Product -re Customer -t all --config ./config.json
   ```
 
 - Generate specific templates for an entity:
 
   ```bash
-  devbuddy generate-CRUD --entity Order --referenceEntity User --templates Controller,ViewModel --config C:\Users\Documents\config.json
+  devbuddy CRUD --entity Order --referenceEntity User --templates Controller,ViewModel --config C:\Users\Documents\config.json
   ```
 
 ---
@@ -154,12 +160,12 @@ To adapt the AutoCRUD tool to your project's needs, modify the `config.json` ent
 
 ### 2. Generate Faker Classes
 
-The `generate-Fakers` command generates Faker classes to help seed your database with dummy data.
+The `Fakers` command generates Faker classes to help seed your database with dummy data.
 
 **Command Syntax:**
 
 ```bash
-devbuddy generate-Fakers --model <ModelName> --modelsPath <ModelsPath> --outputPath <OutputPath>
+devbuddy Fakers --model <ModelName> --modelsPath <ModelsPath> --outputPath <OutputPath>
 ```
 
 **Examples:**
@@ -167,13 +173,13 @@ devbuddy generate-Fakers --model <ModelName> --modelsPath <ModelsPath> --outputP
 - Generate Faker classes for all models:
 
   ```bash
-  devbuddy generate-Fakers -m all -mp ./Models -op ./Fakers
+  devbuddy Fakers -m all -mp ./Models -op ./Fakers
   ```
 
 - Generate a Faker class for a `Product` model:
 
   ```bash
-  devbuddy generate-Fakers --model Product --modelsPath ./Models --outputPath ./Fakers
+  devbuddy Fakers --model Product --modelsPath ./Models --outputPath ./Fakers
   ```
 
 **Options:**
@@ -235,12 +241,6 @@ We welcome contributions to DevBuddy! If you have suggestions for improvements o
 
 ## License
 DevBuddy is released under the MIT License. See the LICENSE file for more details.
-
----
-
-## Compatibility
-
-Please note that this tool is designed for use on Windows operating systems exclusively as of now.
 
 ---
 

@@ -39,9 +39,9 @@ class Program
         }
 
 
-        if (args.Length == 0 || (args[0] != "generate-CRUD" && args[0] != "generate-Fakers"))
+        if (args.Length == 0 || (args[0] != "CRUD" && args[0] != "Fakers"))
         {
-            Console.WriteLine("Error: You must specify either 'generate-CRUD' or 'generate-Fakers'. Use --help for details.");
+            Console.WriteLine("Error: You must specify either 'CRUD' or 'Fakers'. Use --help for details.");
             return;
         }
         var services = ConfigureServices();
@@ -51,7 +51,7 @@ class Program
         try
         {
 
-            if (args[0] == "generate-CRUD")
+            if (args[0] == "CRUD")
             {
                 var codeGeneratorApp = serviceProvider.GetService<CodeGeneratorApp>();
                 var command = new GenerateCRUDCommand(codeGeneratorApp!);
@@ -62,7 +62,7 @@ class Program
                 }
                     await command.GenerateCRUD(args);
             }
-            else if (args[0] == "generate-Fakers")
+            else if (args[0] == "Fakers")
             {
 
                 var FakersGeneratorApp = serviceProvider.GetService<FakersGeneratorApp>();

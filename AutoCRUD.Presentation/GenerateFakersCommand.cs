@@ -38,7 +38,7 @@ namespace AutoCRUD.Presentation
             var outputPathOption = new Option<string>(aliases: new[] { "-op", "--outputPath" }, description: "The path where the Fakers classes will be generated.") { IsRequired = true };
             var modelOption = new Option<string>(aliases: new[] { "-m", "--model" }, description: "The name of the model to generate or 'all' for all models.") { IsRequired = true };
 
-            var command = new Command("generate-Fakers", "Generate Fakers classes for models.")
+            var command = new Command("Fakers", "Generate Fakers classes for models.")
         {
             modelsPathOption,
             outputPathOption,
