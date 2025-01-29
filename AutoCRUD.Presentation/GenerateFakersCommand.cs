@@ -34,9 +34,9 @@ namespace AutoCRUD.Presentation
         }
         private static Command BuildFakerCommand(FakersGeneratorApp FakersGeneratorApp)
         {
-            var modelsPathOption = new Option<string>("--modelsPath", "The path to the models folder.") { IsRequired = true };
-            var outputPathOption = new Option<string>("--outputPath", "The path where the Fakers classes will be generated.") { IsRequired = true };
-            var modelOption = new Option<string>("--model", "The name of the model to generate or 'all' for all models.") { IsRequired = true };
+            var modelsPathOption = new Option<string>(aliases: new[] { "-mp", "--modelsPath" }, description: "The path to the models folder.") { IsRequired = true };
+            var outputPathOption = new Option<string>(aliases: new[] { "-op", "--outputPath" }, description: "The path where the Fakers classes will be generated.") { IsRequired = true };
+            var modelOption = new Option<string>(aliases: new[] { "-m", "--model" }, description: "The name of the model to generate or 'all' for all models.") { IsRequired = true };
 
             var command = new Command("generate-Fakers", "Generate Fakers classes for models.")
         {

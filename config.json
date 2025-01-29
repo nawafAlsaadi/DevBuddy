@@ -1,7 +1,7 @@
 {
     "TemplateCategories": [
       {
-        "Name": "CountryController",
+        "Name": "Controller",
         "Attributes":["FullTemplate"],
         "TemplateInfo": {
           "ProjectLayer": "Web",

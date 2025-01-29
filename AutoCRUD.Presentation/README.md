@@ -1,7 +1,7 @@
 
 # DevBuddy: Your Automated Development Assistant
 
-**DevBuddy** is a command-line tool designed to streamline development by automating repetitive tasks like generating CRUD  (Create, Read, Update, Delete) and Faker classes. CRUD operations are fundamental for any database-driven application, allowing users to manage their data effectively. Faker classes, on the other hand, are used to create mock data that mimics real-world data structures, which is essential for testing and development environments.By using DevBuddy, developers can save time.
+**DevBuddy** is a command-line tool designed for use on Windows operating systems exclusively,  designed to streamline development by automating repetitive tasks like generating CRUD  (Create, Read, Update, Delete) and Faker classes. CRUD operations are fundamental for any database-driven application, allowing users to manage their data effectively. Faker classes, on the other hand, are used to create mock data that mimics real-world data structures, which is essential for testing and development environments.By using DevBuddy, developers can save time.
 
 ---
 
@@ -42,6 +42,22 @@ The `generate-CRUD` command generates CRUD templates for a specified entity.
 devbuddy generate-CRUD --entity <EntityName> --referenceEntity <ReferenceEntity> --templates <Templates> --config <ConfigPath> --rootPath <RootPath>
 ```
 
+**Examples:**
+
+- Generate all templates for an entity using a reference entity:
+
+  ```bash
+  devbuddy generate-CRUD -e Product -re Customer -t all --config ./config.json
+  ```
+
+- Generate specific templates for an entity:
+
+  ```bash
+  devbuddy generate-CRUD --entity Order --referenceEntity User --templates Controller,ViewModel --config C:\Users\Documents\config.json
+  ```
+
+---
+
 **Options:**
 
 - `--entity, -e` (required): The name of the entity for which CRUD templates will be generated.  
@@ -71,7 +87,7 @@ The `config.json` file plays a crucial role in the DevBuddy tool by defining the
 {
     "TemplateCategories": [
       {
-        "Name": "CountryController",
+        "Name": "Controller",
         "Attributes":["FullTemplate"],
         "TemplateInfo": {
           "ProjectLayer": "Web",
@@ -135,24 +151,6 @@ To adapt the AutoCRUD tool to your project's needs, modify the `config.json` ent
 ```
 ---
 
-**Examples:**
-
-- Generate all templates for an entity using a reference entity:
-
-  ```bash
-  devbuddy generate-CRUD --entity Product --referenceEntity Customer --templates all --config ./config.json
-  ```
-
-- Generate specific templates for an entity:
-
-  ```bash
-  devbuddy generate-CRUD --entity Order --referenceEntity User --templates Controller,ViewModel --config C:\Users\Documents\config.json
-  ```
-
----
-
-
----
 
 ### 2. Generate Faker Classes
 
@@ -164,25 +162,12 @@ The `generate-Fakers` command generates Faker classes to help seed your database
 devbuddy generate-Fakers --model <ModelName> --modelsPath <ModelsPath> --outputPath <OutputPath>
 ```
 
-**Options:**
-
-- `--model, -m` (required): The name of the model for which Faker classes will be generated, or 'all' to generate for all models.
-  **Example:** `Product`, `User`.
-
-- `--modelsPath` (required): The directory path where the model definitions are located.
-  **Example:** `./Models`.
-
-- `--outputPath` (required): The folder where the Faker class files will be generated.
-  **Example:** `./Fakers`.
-
----
-
 **Examples:**
 
 - Generate Faker classes for all models:
 
   ```bash
-  devbuddy generate-Fakers --model all --modelsPath ./Models --outputPath ./Fakers
+  devbuddy generate-Fakers -m all -mp ./Models -op ./Fakers
   ```
 
 - Generate a Faker class for a `Product` model:
@@ -191,7 +176,18 @@ devbuddy generate-Fakers --model <ModelName> --modelsPath <ModelsPath> --outputP
   devbuddy generate-Fakers --model Product --modelsPath ./Models --outputPath ./Fakers
   ```
 
+**Options:**
 
+- `--model, -m` (required): The name of the model for which Faker classes will be generated, or 'all' to generate for all models.
+  **Example:** `Product`, `User`.
+
+- `--modelsPath,mp` (required): The directory path where the model definitions are located.
+  **Example:** `./Models`.
+
+- `--outputPath,op` (required): The folder where the Faker class files will be generated.
+  **Example:** `./Fakers`.
+
+---
 
 ## Integrating Generated Classes into Your Application
 
@@ -239,6 +235,12 @@ We welcome contributions to DevBuddy! If you have suggestions for improvements o
 
 ## License
 DevBuddy is released under the MIT License. See the LICENSE file for more details.
+
+---
+
+## Compatibility
+
+Please note that this tool is designed for use on Windows operating systems exclusively as of now.
 
 ---
 
