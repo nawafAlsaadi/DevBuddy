@@ -44,12 +44,10 @@ public class CodeGeneratorApp
     {
          // Automatically set the root path to the current working directory
         rootPath = String.IsNullOrEmpty(rootPath) ? Directory.GetCurrentDirectory() : rootPath;
-        
-        Console.WriteLine($"Root Path Selected: {rootPath}. This will be the base location for all generated files. {rootPath}");
 
+        Console.WriteLine($"Generating {entityName} from {referenceEntity} at {rootPath}");
         var templates = TemplatesToList(templatesInput, templateConfigs);
-        Console.WriteLine($"Generating   for {entityName}, based on {referenceEntity}");
-        try
+         try
         {
             FileModel file = new FileModel(rootPath: rootPath, null, entity: entityName, basedEntity: referenceEntity);
             _codeGenerator.GenerateTemplatePage(file, templateConfigs);

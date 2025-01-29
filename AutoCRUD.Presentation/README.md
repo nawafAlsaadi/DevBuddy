@@ -121,7 +121,7 @@ To adapt the AutoCRUD tool to your project's needs, modify the `config.json` ent
 
 ## Important Note
 
-- **Configuring Model Templates in config.json:** To ensure that DevBuddy accurately recognizes and processes your Model templates, it is crucial to precisely define each model's configuration settings in the config.json file. This configuration enables DevBuddy to effectively retrieve the properties from the model during code generation. The following example illustrates how to set up a Model template properly:
+- **Configuring Model Templates in config.json:** To ensure that DevBuddy accurately recognizes and processes your Model templates, it is crucial to precisely define model configuration settings in the config.json file. This configuration enables DevBuddy to effectively retrieve the properties from the model during code generation. The following example illustrates how to set up a Model template properly:
 ```bash
 {
   "Name": "Model",

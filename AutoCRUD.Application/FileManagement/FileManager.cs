@@ -33,7 +33,7 @@ namespace AutoCRUD.Application.FileManager
 #if DEBUG
             // In debug mode, always overwrite the file
             File.WriteAllText(path, content);
-            Console.WriteLine($"[DEBUG MODE] Success! File has been created and saved at {path}. Happy coding!");
+                Console.WriteLine($"[DEBUG MODE]File saved at {path}");
 #else
     // In release mode, ask for confirmation if the file exists
     if (File.Exists(path))
@@ -47,7 +47,7 @@ namespace AutoCRUD.Application.FileManager
         }
     }
     File.WriteAllText(path, content);
-    Console.WriteLine($"Success! File has been created and saved at {path}. Happy coding!");
+Console.WriteLine($"File saved at {path}.");
 #endif
             }
         }

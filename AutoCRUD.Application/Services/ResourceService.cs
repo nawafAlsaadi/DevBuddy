@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using AutoCRUD.Application.Interfaces;
@@ -31,7 +32,11 @@ namespace AutoCRUD.Application.Services
                 }  
             // Save changes
             doc.Save(filePath); //this is right 
-          //File.SetLastWriteTime(filePath, DateTime.Now);
+
+            Console.WriteLine($"Success! File has been created and saved at {filePath}.");
+            Console.WriteLine("After the tool has finished, please ensure to right-click the file in Solution Explorer and select 'Run Custom Tool' to execute the code generator and prevent any errors.");
+            Console.WriteLine("Press Enter to confirm you've these steps.");
+            Console.ReadLine();
         }
         private void AddResourceIfNotExists(XDocument doc, string resourceName, string resourceValue)
         {
