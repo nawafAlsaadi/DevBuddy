@@ -35,12 +35,11 @@ namespace AutoCRUD.Presentation
         {
 
             var entityOption = new Option<string>(new[] { "--entity", "-e" }, "Name of the entity.") { IsRequired = true };
-            var referenceEntityOption = new Option<string>(new[] { "--referenceEntity", "-re" }, "Enter the name of the base entity to copy from") { IsRequired = true }; ;
+            var referenceEntityOption = new Option<string>(new[] { "--referenceEntity", "-re" }, "Enter the name of the base entity to copy from")  ;
             var templatesOption = new Option<string>(
                 aliases: new[] { "-t", "--templates" },
-                description: "Specify the template(s) to generate. Use 'all' to generate all available templates, or provide a comma-separated list such as 'Controller,ViewModel'."
-            )
-            { IsRequired = true };
+                description: "Specify the template(s) to generate. Use 'all' to generate all available templates, or provide a comma-separated list such as 'Controller,ViewModel'.");
+            
             var rootPathOption = new Option<string>("--rootPath", "The root path for file generation.");
             var configOption = new Option<string>("--config", "Path to a configuration file (optional).") ;
 

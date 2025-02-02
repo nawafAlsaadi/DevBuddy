@@ -13,9 +13,8 @@ Please note that this tool is designed for use on Windows operating systems excl
 
 ## Features
 
-- CRUD Operations: Automatically generate classes that support all CRUD operations for your database models.
+- CRUD Operations: Automatically generate classes that support all CRUD operations for your models.
 - Faker Support: Easily generate Faker classes to produce realistic and random data for testing. DevBuddy utilizes the Bogus library, a popular and powerful tool for creating fake data.
-- Simple, flexible, and easy to use.
 
 ---
 

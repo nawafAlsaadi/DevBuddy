@@ -21,15 +21,15 @@ public class CodeGeneratorApp
         UserInputService userInputService,
         TemplateSelectionService templateSelectionService)
     {
-            _codeGenerator = codeGenerator;
+        _codeGenerator = codeGenerator;
         _userInputService = userInputService;
         _templateSelectionService = templateSelectionService;
     }
     #endregion
 
-    private List<TemplateConfig> TemplatesToList(string templatesInput, List<TemplateConfig> templateConfigs)
+    private List<TemplateConfig> TemplatesToList(string? templatesInput, List<TemplateConfig> templateConfigs)
     {
-        if (templatesInput.Equals("all", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(templatesInput))
+        if (string.IsNullOrEmpty(templatesInput) || templatesInput.Equals("all", StringComparison.OrdinalIgnoreCase) )
         {
             // Return the Name property of all TemplateConfig objects
             return templateConfigs.ToList();
@@ -42,12 +42,13 @@ public class CodeGeneratorApp
     }
     public void RunCRUDApp(string entityName, string referenceEntity, string templatesInput, string rootPath, string configPath, List<TemplateConfig> templateConfigs)
     {
-         // Automatically set the root path to the current working directory
+        // Automatically set the root path to the current working directory
         rootPath = String.IsNullOrEmpty(rootPath) ? Directory.GetCurrentDirectory() : rootPath;
+        referenceEntity ??= "Address";
 
         Console.WriteLine($"Generating {entityName} from {referenceEntity} at {rootPath}");
         var templates = TemplatesToList(templatesInput, templateConfigs);
-         try
+        try
         {
             FileModel file = new FileModel(rootPath: rootPath, null, entity: entityName, basedEntity: referenceEntity);
             _codeGenerator.GenerateTemplatePage(file, templateConfigs);
@@ -56,7 +57,7 @@ public class CodeGeneratorApp
         {
             Console.WriteLine($"Error generating  : {ex.Message}");
         }
-        ExitApplication();   
+        ExitApplication();
     }
 
 
@@ -66,5 +67,5 @@ public class CodeGeneratorApp
         Environment.Exit(0);
     }
 
- 
+
 }
