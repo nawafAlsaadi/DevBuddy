@@ -101,6 +101,15 @@
       }
     },
     {
+      "Name": "_SearchForm",
+      "Attributes": [ "FullTemplate" ],
+      "TemplateInfo": {
+        "ProjectLayer": "Web",
+        "Subfolder": "Views/{entityName}",
+        "FileNamePattern": "_SearchForm.cshtml"
+      }
+    },
+    {
       "Name": "_Form",
       "Attributes": [ "HalfTemplate" ],
       "TemplateInfo": {
